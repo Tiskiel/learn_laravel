@@ -16,6 +16,10 @@ class Post extends Model
 
     protected $guarded = [];
 
+    //En utilisant la variable $with cela permet de ne pas devoir utiliser le ->load(['category', 'author']) directement sur la route et
+    //permet d'être plsu efficace au nivaux des querys SQL
+    protected $with = ['category', 'author'];
+
     // protected $fillable = ['title', 'category_id', 'slug', 'excerpt', 'body'];
 
     public function category() {

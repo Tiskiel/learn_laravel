@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     //Post::with('Category')->get() === Post::all() mais génère que 2query comparé à all() qui génère une query par éléments.
-    $listPosts = Post::latest()->with(['Category', 'author'])->get();
+    $listPosts = Post::latest()->get();
 
     return view('posts', ["posts" => $listPosts]);
 });
