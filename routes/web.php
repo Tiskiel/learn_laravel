@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -15,11 +16,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $listPosts = Post::all();
+    //Post::with('Category')->get() === Post::all() mais génère que 2query comparé à all() qui génère une query par éléments.
+    $listPosts = Post::with('Category')->get();
 
     return view('posts', ["posts" => $listPosts]);
 });
 
 Route::get('posts/{post}', function (Post $post) {
     return view('post', ['post' => $post]);
+});
+
+Route::get('categories/{category}', function(Category $category) {
+    return view('posts', [
+        'posts' => $category->posts
+    ]);
 });
