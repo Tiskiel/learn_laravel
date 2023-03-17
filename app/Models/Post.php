@@ -9,7 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    //Change la clé que pointe la route
+    //Change la clé que pointe la router
     public function getRouteKeyName() {
         return 'slug';
     }
