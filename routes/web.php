@@ -20,7 +20,10 @@ Route::get('/', function () {
     //Post::with('Category')->get() === Post::all() mais génère que 2query comparé à all() qui génère une query par éléments.
     $listPosts = Post::latest()->get();
 
-    return view('posts', ["posts" => $listPosts]);
+    return view('posts', [
+        "posts" => $listPosts,
+        "categories" => Category::all()
+    ]);
 });
 
 Route::get('posts/{post}', function (Post $post) {
