@@ -27,17 +27,21 @@ Route::get('/', function () {
 });
 
 Route::get('posts/{post}', function (Post $post) {
-    return view('post', ['post' => $post]);
+    return view('post', [
+        'post' => $post
+    ]);
 });
 
 Route::get('categories/{category}', function(Category $category) {
     return view('posts', [
-        'posts' => $category->posts
+        'posts' => $category->posts,
+        "categories" => Category::all()
     ]);
 });
 
 Route::get('author/{author:username}', function(User $author) {
     return view('posts', [
-        'posts' => $author->posts
+        'posts' => $author->posts,
+        "categories" => Category::all()
     ]);
 });
