@@ -5,4 +5,5 @@
 <h2>Package</h2>
 <ul>
     <li>Clockwork : utilisé pour voir les query sql dans le navigateur</li>
+    <li>Alpinejs : utilisé avec blade</li>
 </ul>
