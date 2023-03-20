@@ -20,12 +20,13 @@ class Post extends Model
     //permet d'être plsu efficace au nivaux des querys SQL
     protected $with = ['category', 'author'];
 
-    public function scopeFilter($query) {
-        if(request('search')) {
+    public function scopeFilter($query, array $filters) {
+        $query->when($filters['search'] ?? false, fn ($query, $search) =>
             $query
-                    ->where('title', 'like', '%' . request('search') . '%')
-                    ->where('body', 'like', '%' . request('search') . '%');
-        }
+                ->where('title', 'like', '%' . request('search') . '%')
+                ->where('body', 'like', '%' . request('search') . '%')
+    );
+        
     }
 
     // protected $fillable = ['title', 'category_id', 'slug', 'excerpt', 'body'];
