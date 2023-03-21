@@ -26,7 +26,7 @@ class Post extends Model
                 ->where('title', 'like', '%' . request('search') . '%')
                 ->where('body', 'like', '%' . request('search') . '%'));
         
-        $query->when($filters['category'] ?? false, fn ($query, $search) =>
+        $query->when($filters['category'] ?? false, fn ($query, $category) =>
             $query->whereHas('category', fn ($query) => 
                 $query->where('slug', $category))
     );
