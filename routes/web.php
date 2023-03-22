@@ -21,11 +21,16 @@ Route::post('newsletter', function () {
         'apiKey' => config('services.mailchimp.key'),
         'server' => 'us11'
     ]);
-
-    $response = $mailchimp->lists->addListMember('54632d5009',[
-        'email_address' => request('email'),
-        'status' => 'pending'
-    ]);
+    try { 
+        $response = $mailchimp->lists->addListMember('54632d5009',[
+            'email_address' => request('email'),
+            'status' => 'pending'
+        ]);
+    } catch (\Exception $e) {
+        \Illuminate\Validation\ValidationException::withMessages([
+            'email' => 'This email could not be added to our newsletter list'
+        ]);
+    }
 
 
     return redirect('/')->with('success', 'You are now signed up for our newsletter');
